@@ -4,10 +4,9 @@ const angular = require('angular');
 const ngCookies = require('angular-cookies');
 const ngResource = require('angular-resource');
 const ngSanitize = require('angular-sanitize');
-
-
 const uiRouter = require('angular-ui-router');
 const uiBootstrap = require('angular-ui-bootstrap');
+
 // const ngMessages = require('angular-messages');
 // import ngValidationMatch from 'angular-validation-match';
 
@@ -22,7 +21,7 @@ import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
-
+import lostPage from './lostPage/lostPage.component'
 
 
 import './app.scss';
@@ -31,8 +30,6 @@ angular.module('lafApp', [
   ngCookies,
   ngResource,
   ngSanitize,
-
-
   uiRouter,
   uiBootstrap,
 
@@ -40,10 +37,10 @@ angular.module('lafApp', [
   account,
   admin,  navbar,
   footer,
-  main,
-  constants,
+  main, lostPage,
+  constants, 
 
-  util
+  util, 
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
