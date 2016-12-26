@@ -26,6 +26,16 @@ import lostPage from './lostPage/lostPage.component'
 
 import './app.scss';
 
+angular
+  .element(document)
+  .ready(() => {
+    angular.bootstrap(document, ['lafApp'], {
+      strictDi: true
+    });
+  });
+
+
+const uiMap = require('uiGmapgoogle-maps');
 angular.module('lafApp', [
   ngCookies,
   ngResource,
@@ -38,11 +48,23 @@ angular.module('lafApp', [
   admin,  navbar,
   footer,
   main, lostPage,
-  constants, 
+  constants, uiMap,
 
   util, 
 ])
-  .config(routeConfig)
+.config(routeConfig)
+.config(function (uiGmapGoogleMapApiProvider) {
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyBYhSeMP_1hP9gm4MpWOezqUaoJOYPrzNw',
+    v: '2.3.2', //defaults to latest 3.X anyhow
+    libraries: 'weather,geometry,visualization'
+  });
+})
+.controller('mapCtrl', function($scope, uiGmapGoogleMapApi) {
+    uiGmapGoogleMapApi.then(function(maps) {
+        $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+    });
+})
   .run(function($rootScope, $location, Auth) {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in
@@ -52,13 +74,5 @@ angular.module('lafApp', [
           $location.path('/login');
         }
       });
-    });
-  });
-
-angular
-  .element(document)
-  .ready(() => {
-    angular.bootstrap(document, ['lafApp'], {
-      strictDi: true
     });
   });

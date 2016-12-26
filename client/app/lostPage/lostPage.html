@@ -1,12 +1,12 @@
-
-
+<script src="http://rawgit.com/angular-ui/angular-google-maps/2.3.2/dist/angular-google-maps.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.0.1/lodash.js" type="text/javascript"></script>
 <div class="container">
     
     <!-- Map and Side Panel -->
     <div class="row content">
         <!-- Google Map -->
         <div class="col-md-7">
-            <div class=".panel"> placeholder </div>
+            <ui-gmap-google-map center='map.center' zoom='map.zoom'>{{map}}</ui-gmap-google-map>
         </div>
         <!-- Side Panel -->
         <div class="col-md-5">
