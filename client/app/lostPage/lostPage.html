@@ -5,8 +5,15 @@
     <div class="row content">
         <!-- Google Map -->
         <div class="col-md-7">
-            <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="https://maps.google.com/maps/api/js?key=AIzaSyBYhSeMP_1hP9gm4MpWOezqUaoJOYPrzNw">
-                <map class="my-map" default-style="true" center="41,-87" zoom="3"></map>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">Where did you see it last? <span class="glyphicon glyphicon-map-marker"></span></h2>
+                </div>
+                <div class="panel-body">
+                    <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="https://maps.google.com/maps/api/js?key=AIzaSyBYhSeMP_1hP9gm4MpWOezqUaoJOYPrzNw">
+                    <map class="my-map" default-style="true" center="41,-87" zoom="3"></map>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Side Panel -->
@@ -14,7 +21,7 @@
             <div class="panel panel-default">
                 <!-- Panel Title -->
                 <div class="panel-heading">
-                    <h2 class="panel-title text-center">Input your item! <span class="glyphicon glyphicon-map-marker"></span></h2>
+                    <h2 class="panel-title text-center">Describe it!</h2>
                 </div>
                 <!-- Panel Body -->
                 <div class="panel-body">
@@ -28,7 +35,7 @@
                         
                         <div class="form-group">
                             <label for="description">Short description</label>
-                            <input type="text" class="form-control" id="shortd" placeholder="72" ng-model="formData.shortd" required>
+                            <input type="text" class="form-control" id="shortd" placeholder="Small; bright blue" ng-model="formData.shortd" required>
                         </div>
                         
                         <div class="form-group">
@@ -39,10 +46,7 @@
                             <label for="longitude">Longitude</label>
                             <input type="text" class="form-control" id="longitude" value="-98.350" ng-model="formData.longitude" readonly>
                         </div>
-                        <div class="form-group">
-                            <label for="verified">HTML5 Verified Location? <span><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span></button></span></label>
-                            <input type="text" class="form-control" id="verified" placeholder= "Nope (Thanks for spamming my map...)" ng-model="formData.htmlverified" readonly>
-                        </div>
+                        
                         <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
                         <button type="submit" class="btn btn-danger btn-block" ng-disabled="addForm.$invalid">Submit</button>
                     </form>
