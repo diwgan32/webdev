@@ -8,7 +8,7 @@ const ngSanitize = require('angular-sanitize');
 const uiRouter = require('angular-ui-router');
 const uiBootstrap = require('angular-ui-bootstrap');
 
-// const ngMessages = require('angular-messages');
+//const ngMessages = require('angular-messages');
 // import ngValidationMatch from 'angular-validation-match';
 
 
@@ -40,7 +40,7 @@ angular.module('lafApp', [
   ngResource,
   ngSanitize,
   uiRouter,
-  uiBootstrap,
+  uiBootstrap, 
 
   _Auth,
   account,
