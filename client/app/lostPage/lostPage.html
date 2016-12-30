@@ -27,7 +27,7 @@
                 <!-- Panel Body -->
                 <div class="panel-body">
                     <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
-                    <form name ="addForm" novalidate>
+                    <form name ="form" ng-submit="lostPageCtrl.submitLostItems(form)" novalidate>
                         <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
                         <div class="form-group">
                             <label for="objectname">Name</label> 
@@ -48,17 +48,49 @@
                        		</div>
                        		
                        	</div>
+                        <button type="submit" class="btn btn-danger btn-block" ng-disabled="form.$invalid">Submit</button>
                     </form>                      	
                         	              	
                 </div>
                         
                         <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
-         <button type="submit" class="btn btn-danger btn-block" ng-disabled="addForm.$invalid">Submit</button>
+         
                     
                 </div>
             </div>
         </div>
-    </div>
+
     <hr/>
+
+    <div class="panel panel-default">
+        <div class="panel panel-heading"> 
+            <h2 class="panel-title text-center"> Your Lost Things</h2>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Item</th>
+                  <th>Description</th>
+                  <th>Locations</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  ng-repeat="thing in return_items">
+                  <th scope="row">{{$index+1}}</th>
+                  <td>{{thing.itemName}}</td>
+                  <td>{{thing.itemDesc}}</td>
+                  <td><button class="btn btn-info" ng-click="lostPageCtrl.handleClick(thing)"> Location </button> 
+
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+        </div>
+    </div>
+
     
 </div>
+

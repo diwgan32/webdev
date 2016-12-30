@@ -6,7 +6,7 @@
 'use strict';
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
-
+import LostItem from '../api/lostItem/lostItem.model'
 Thing.find({}).remove()
   .then(() => {
     Thing.create({
@@ -55,5 +55,20 @@ User.find({}).remove()
     })
     .then(() => {
       console.log('finished populating users');
+    });
+  });
+
+
+LostItem.find({}).remove()
+  .then(() => {
+    LostItem.create({
+      userName:'test@example.com',
+      itemName: 'Jacket',
+      itemDesc: 'Small; blue',
+      lats: [0],
+      longs: [0]
+    })
+    .then(() => {
+      console.log('finished populating items');
     });
   });

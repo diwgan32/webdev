@@ -47,7 +47,7 @@ angular.module('lafApp', [
   admin,  navbar,
   footer,
   main, lostPage,
-  constants, 'ngMap',
+  constants, uiMap,
 
   util, 
 ])
