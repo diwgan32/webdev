@@ -16,9 +16,27 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   padding: 0.2em 0;
 }
 
+main {
+    /* start 'enter' transition */
+    &.ng-enter {
+        /* transition on enter for .5s */
+        transition: .5s;
+ 
+        /* start with opacity 0 (invisible) */
+        opacity: 0;
+    }
+ 
+    /* end 'enter' transition */
+    &.ng-enter-active {
+        /* end with opacity 1 (fade in) */
+        opacity: 1;
+    }
+}
+
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'admin/admin';
+@import 'foundPage/foundPage';
 @import 'lostPage/lostPage';
 @import 'main/main';
 @import '../components/footer/footer';

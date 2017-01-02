@@ -118,7 +118,7 @@ export class LostPageComponent {
 
 }
 
-export default angular.module('webdevApp.lostPage', [uiRouter, 'ngMap'])
+export default angular.module('webdevApp.lostPage', [uiRouter])
     .config(routes)
     .component('lostPage', {
         template: require('./lostPage.html'),
