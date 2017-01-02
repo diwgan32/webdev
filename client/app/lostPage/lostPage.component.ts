@@ -71,14 +71,9 @@ export class LostPageComponent {
                     lats: this.$scope.lat,
                     longs: this.$scope.long
                 }).$promise
-                .then(() => {
-                    this.$scope.return_items.push({
-                        userName: this.getCurrentUser().email,
-                        itemName: this.$scope.lostItemName,
-                        itemDesc: this.$scope.lostItemDescription,
-                        lats: this.$scope.lat,
-                        longs: this.$scope.long
-                    });
+                .then((result) => {
+                    
+                    this.$scope.return_items.push(result);
                     this.$scope.lostItemName = "";
                     this.$scope.lostItemDescription = "";
                     this.$scope.lat = [];
@@ -90,15 +85,20 @@ export class LostPageComponent {
 
     getLostItems() {
         var list = [];
-
-        this.LostItem.query({userName: this.getCurrentUser().email}).$promise.then( (data) => {
+        this.getCurrentUser().$promise.then( (user) => {
             
-            for(let datum of data){
-                if(datum.userName == this.getCurrentUser().email){
+            this.LostItem.getUsers({userName: user.email}).$promise.then( (items) => 
+            {
+                for(let datum of items){
                     list.push(datum);
                 }
-            }
+                
+            })
+            .catch(err => {
+                console.log(err);
+            });
         });
+       
         return list;
     }
 

@@ -1,6 +1,6 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/lostItems              ->  index
+ * GET     /api/lostItems/?query              ->  getUsers
  * POST    /api/lostItems              ->  create
  * GET     /api/lostItems/:id          ->  show
  * PUT     /api/lostItems/:id          ->  upsert
@@ -12,7 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import LostItem from './lostItem.model';
-
+const url = require('url');
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
@@ -63,13 +63,6 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of LostItems
-export function index(req, res) {
-  return LostItem.find().exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
-
 // Gets a single LostItem from the DB
 export function show(req, res) {
   return LostItem.findById(req.params.id).exec()
@@ -113,5 +106,14 @@ export function destroy(req, res) {
   return LostItem.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
+    .catch(handleError(res));
+}
+
+export function getUsers(req, res){
+  var url_parts = url.parse(req.url, true);
+  var queryFactors = url_parts.query;
+  var email= queryFactors["userName"];
+  return LostItem.find({userName: email}).exec()
+    .then(respondWithResult(res))
     .catch(handleError(res));
 }
