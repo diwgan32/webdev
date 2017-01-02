@@ -23,6 +23,7 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import lostPage from './lostPage/lostPage.component'
+import foundPage from './foundPage/foundPage.component'
 import './app.scss';
 
 angular
@@ -47,7 +48,7 @@ angular.module('lafApp', [
   admin,  navbar,
   footer,
   main, lostPage,
-  constants, uiMap,
+  constants, uiMap, foundPage,
 
   util, 
 ])
