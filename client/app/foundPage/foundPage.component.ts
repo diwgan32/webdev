@@ -8,7 +8,7 @@ import routes from './foundPage.routes';
 export class FoundPageComponent {
   /*@ngInject*/
   constructor() {
-    this.message = 'Hello';
+
   }
 }
 

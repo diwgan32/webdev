@@ -16,8 +16,7 @@
             <a ui-sref="{{item.state}}">{{item.title}}</a>
         </li>
         <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
-        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a href="lostPage">Lost Something?</a></li>
-        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="foundPage">Found Something?</a></li>
+        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="lostPageMap">Lost Something?</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

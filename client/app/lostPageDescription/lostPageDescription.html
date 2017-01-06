@@ -1,0 +1,36 @@
+<div class="container">
+  
+ 
+      <div class="panel panel-default">
+        <!-- Panel Title -->
+        <div class="panel-heading">
+          <h2 class="panel-title text-center">Describe it!</h2>
+        </div>
+        <!-- Panel Body -->
+        <div class="panel-body">
+          <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
+          <form name ="form" novalidate>
+            <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
+            <div class="form-group">
+              <label for="objectname">Name</label>
+              <input type="text" class="form-control" id="objectname" placeholder="Jacket" ng-model="lostItemName" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="description">Short description</label>
+              <input type="text" class="form-control" id="shortd" placeholder="Small; bright blue" ng-model="lostItemDescription" required>
+            </div>
+            
+          </div>
+          <button type="submit" class="btn btn-danger btn-block" ng-disabled="form.$invalid" ng-click="lostPageDescriptionCtrl.submitLostItems()">Submit</button>
+        </form>
+        
+      </div>
+      
+      <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
+      
+      
+    </div>
+  </div>
+
+<hr/>

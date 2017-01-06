@@ -1,4 +1,4 @@
-
+<div class="no-animate">
 <header class="hero-unit" id="banner">
     <div class="container">
         <h1>Welcome to laf!</h1>
@@ -14,4 +14,7 @@
     <div class="panel panel-body">
         </div>
         </div>
+    <button ng-show="$ctrl.isLoggedIn()" class="btn btn-block" ng-click="$ctrl.lost()"> I lost something! </button>
+    <button ng-show="$ctrl.isLoggedIn()" class="btn btn-block" ng-click="found()"> I found something! </button>
 </section>
+</div>

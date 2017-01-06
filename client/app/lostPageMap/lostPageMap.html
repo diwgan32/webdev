@@ -1,0 +1,18 @@
+<div class="slide" ui-view>
+   	<div class="panel panel-default">
+ 		<div class="panel-heading">
+          <h2 class="panel-title text-center">Pick up to 4 places <span class="glyphicon glyphicon-map-marker"></span></h2>
+        </div>
+        <div class="panel-body">
+          <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="https://maps.google.com/maps/api/js?key=AIzaSyBYhSeMP_1hP9gm4MpWOezqUaoJOYPrzNw">
+            <map class="my-map" default-style="true" center="37.43 -122.17" zoom="16">
+              <marker ng-repeat="loc in coordString" position={{loc}} />
+            </map>
+          </div>
+          
+        </div>
+
+      </div>
+      <button class="btn btn-info btn-block" ng-show="lostPageMapCtrl.isValid()" ng-click="lostPageMapCtrl.goToDescription()"> Next.. </button>
+    </div>
+</div>

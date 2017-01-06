@@ -25,6 +25,9 @@ import constants from './app.constants';
 import util from '../components/util/util.module';
 import lostPage from './lostPage/lostPage.component'
 import foundPage from './foundPage/foundPage.component'
+import lostPageMap from './lostPageMap/lostPageMap.component'
+import lostPageDescription from './lostPageDescription/lostPageDescription.component'
+import {LostItemData} from '../components/dataService/lostitemdata.service.ts'
 import './app.scss';
 
 angular
@@ -48,8 +51,8 @@ angular.module('lafApp', [
   account,
   admin,  navbar,
   footer,
-  main, lostPage,
-  constants, uiMap, foundPage, ngAnimate,
+  main,
+  constants, uiMap, lostPageMap, ngAnimate, lostPageDescription, lostPage,
 
   util, 
 ])
@@ -66,6 +69,7 @@ angular.module('lafApp', [
         }
       });
     });
-  });
+  })
+  .factory('LostItemData', LostItemData);
 
 

@@ -7,29 +7,24 @@ export class MainController {
 
   awesomeThings = [];
   newThing = '';
-
+  isLoggedIn: Function;
+  isAdmin: Function;
+  getCurrentUser: Function;
+  isCollapsed = true;
+  $state;
   /*@ngInject*/
-  constructor($http) {
-    this.$http = $http;
-
+  constructor($http, Auth, $state) {
+    'ngInject';
+    this.isLoggedIn = Auth.isLoggedInSync;
+    this.isAdmin = Auth.isAdminSync;
+    this.getCurrentUser = Auth.getCurrentUserSync;
+    this.$state = $state;
   }
 
-  $onInit() {
-    this.$http.get('/api/things').then(response => {
-      this.awesomeThings = response.data;
-    });
+  lost(){
+    this.$state.go('lostPageMap');
   }
 
-  addThing() {
-    if (this.newThing) {
-      this.$http.post('/api/things', { name: this.newThing });
-      this.newThing = '';
-    }
-  }
-
-  deleteThing(thing) {
-    this.$http.delete('/api/things/' + thing._id);
-  }
 }
 
 export default angular.module('lafApp.main', [
@@ -40,3 +35,5 @@ export default angular.module('lafApp.main', [
       controller: MainController
     })
     .name;
+
+

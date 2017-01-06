@@ -9,8 +9,8 @@ export function LostItemResource($resource) {
   	getUsers: {
   		method: 'GET',
       params:{
-        userName: '';
-      }
+        userName: ''
+      },
   		isArray: true
   	}
   }
