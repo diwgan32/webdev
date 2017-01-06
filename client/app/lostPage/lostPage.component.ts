@@ -5,26 +5,29 @@ const uiRouter = require('angular-ui-router');
 import {
     LostItemResource
 } from './lostItem.service.ts';
-import routes from './lostPage.routes';
 
+import routes from './lostPage.routes';
+import {AnchorSmoothScroll} from '../../components/util/smoothscroll.service.ts';
 export class LostPageComponent {
     /*@ngInject*/
     $scope;
     LostItem;
     getCurrentUser: Function;
     $http;
-    constructor(NgMap, $scope, Auth, LostItem, $uibModal, $http) {
+    AnchorSmoothScroll;
+    constructor(NgMap, $scope, Auth, LostItem, $uibModal, $http, AnchorSmoothScroll) {
         'ngInject';
         $scope.lostItemName = "";
         $scope.lostItemDescription = "";
         $scope.numClick = 0;
-        $scope.lat = [];
-        $scope.long = [];
+        $scope.lats = [];
+        $scope.longs = [];
+        $scope.coordString = [];
         this.$scope = $scope;
         this.$http = $http;
         this.getCurrentUser = Auth.getCurrentUserSync;
         this.LostItem = LostItem;
-
+        this.AnchorSmoothScroll = AnchorSmoothScroll;
         $scope.return_items = this.getLostItems();
         $scope.open = function(item, index) {
 
@@ -52,8 +55,9 @@ export class LostPageComponent {
             });
             map.addListener('dblclick', function(event) {
                 if ($scope.numClick < 4) {
-                    $scope.lat.push(event.latLng.lat());
-                    $scope.long.push(event.latLng.lng());
+                    $scope.lats.push(event.latLng.lat());
+                    $scope.longs.push(event.latLng.lng());
+                    $scope.coordString.push("["+event.latLng.lat()+","+event.latLng.lng()+"]");
                     $scope.numClick++;
                     $scope.$apply();
                 }
@@ -63,21 +67,24 @@ export class LostPageComponent {
     }
 
     submitLostItems(form) {
-        if(this.$scope.lat.length > 0){
+        if(this.$scope.lats.length > 0){
+
             this.LostItem.save({
                     userName: this.getCurrentUser().email,
                     itemName: this.$scope.lostItemName,
                     itemDesc: this.$scope.lostItemDescription,
-                    lats: this.$scope.lat,
-                    longs: this.$scope.long
+                    lats: this.$scope.lats,
+                    longs: this.$scope.longs
                 }).$promise
                 .then((result) => {
                     
                     this.$scope.return_items.push(result);
                     this.$scope.lostItemName = "";
                     this.$scope.lostItemDescription = "";
-                    this.$scope.lat = [];
-                    this.$scope.long = [];
+                    this.$scope.lats = [];
+                    this.$scope.longs = [];
+                    this.$scope.coordString = [];
+                    this.AnchorSmoothScroll.smoothScroll("items");
                 })
         }
 
@@ -116,6 +123,9 @@ export class LostPageComponent {
 
     }
 
+    locationIsNotSelectedOnMap(){
+        return this.$scope.lats.length == 0;
+    }
 }
 
 export default angular.module('webdevApp.lostPage', [uiRouter])
@@ -147,8 +157,6 @@ export default angular.module('webdevApp.lostPage', [uiRouter])
         }
 
         vm.source += "&key=AIzaSyAOhPUSyEjpkDs4SpVN5olLerP8LOP2qaw";
-
-        console.log(vm.source);
         
         vm.close = function() {
             $modalInstance.close();
@@ -156,4 +164,5 @@ export default angular.module('webdevApp.lostPage', [uiRouter])
 
     }])
     .factory('LostItem', LostItemResource)
+    .service('AnchorSmoothScroll', AnchorSmoothScroll)
     .name;

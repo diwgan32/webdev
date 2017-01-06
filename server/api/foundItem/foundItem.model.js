@@ -3,9 +3,26 @@
 import mongoose from 'mongoose';
 
 var FoundItemSchema = new mongoose.Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  userName: {
+  	type: String,
+  	required: true
+  },
+  itemName: {
+  	type: String,
+  	required: true
+  },
+  fileName: {
+  	type: String,
+  	required: true
+  },
+  lat: {
+  	type: Number,
+  	required: true
+  },
+  long: {
+  	type: Number,
+  	required: true
+  }
 });
 
 export default mongoose.model('FoundItem', FoundItemSchema);

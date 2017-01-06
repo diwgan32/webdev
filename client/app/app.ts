@@ -49,7 +49,7 @@ angular.module('lafApp', [
   admin,  navbar,
   footer,
   main, lostPage,
-  constants, uiMap, foundPage, ngAnimate,
+  constants, uiMap, foundPage, ngAnimate, 
 
   util, 
 ])
