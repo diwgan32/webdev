@@ -7,6 +7,7 @@
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
 import LostItem from '../api/lostItem/lostItem.model'
+import FoundItem from '../api/foundItem/foundItem.model'
 Thing.find({}).remove()
   .then(() => {
     Thing.create({
@@ -72,3 +73,14 @@ LostItem.find({}).remove()
       console.log('finished populating items');
     });
   });
+
+  FoundItem.find({}).remove()
+    .then(() => {
+      FoundItem.create({userName: 'test@example.com',
+      itemName: 'Jacket',
+      itemDesc: 'Small; blue',
+      fileName: "./img/AAAA.jpg",
+      lat: 0,
+      long: 0
+    })
+    });

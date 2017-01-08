@@ -11,6 +11,10 @@ var FoundItemSchema = new mongoose.Schema({
   	type: String,
   	required: true
   },
+  itemDesc:{
+    type: String,
+    required: true
+  },
   fileName: {
   	type: String,
   	required: true

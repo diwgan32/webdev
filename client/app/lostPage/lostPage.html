@@ -3,7 +3,6 @@
   <!-- Map and Side Panel -->
   
     <!-- Google Map -->
-    
       <div class="panel panel-default" id="map">
         <div class="panel-heading">
           <h2 class="panel-title text-center">Where did you see it last? <span class="glyphicon glyphicon-map-marker"></span></h2>
@@ -16,7 +15,7 @@
           </div>
           
         </div>
-        <button class="btn btn-info btn-block" ng-click="lostPageCtrl.AnchorSmoothScroll.smoothScroll('describe')" ng-disabled="lostPageCtrl.locationIsNotSelectedOnMap()">Next!</button>
+        <button class="btn btn-info btn-block" ng-click="lostPageCtrl.AnchorSmoothScroll.smoothScroll('describe')">Next!</button>
       </div>
       <div class="spacer"></div>
 
@@ -28,7 +27,7 @@
         <!-- Panel Body -->
         <div class="panel-body">
           <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
-          <form name ="form" ng-submit="lostPageCtrl.submitLostItems(form)" novalidate>
+          <form name ="form" ng-submit="foundPageCtrl.submitFoundItem(form)" novalidate>
             <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
             <div class="form-group">
               <label for="objectname">Name</label>

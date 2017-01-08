@@ -77,15 +77,19 @@ export class LostPageComponent {
                     longs: this.$scope.longs
                 }).$promise
                 .then((result) => {
-                    
+                    console.log("success");
                     this.$scope.return_items.push(result);
                     this.$scope.lostItemName = "";
                     this.$scope.lostItemDescription = "";
                     this.$scope.lats = [];
                     this.$scope.longs = [];
                     this.$scope.coordString = [];
-                    this.AnchorSmoothScroll.smoothScroll("items");
-                })
+                    this.$scope.numClick = 0;
+                    this.AnchorSmoothScroll.smoothScroll("items");    
+                }).catch((error) => {
+                    console.log(error)
+                });
+                
         }
 
     }
