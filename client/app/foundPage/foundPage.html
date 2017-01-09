@@ -3,9 +3,11 @@
 	<div class="panel-heading">
 	<h2 class="panel-title text-center">Take a picture!</h2>
 	</div>
-	<div class="panel-body placeholder">
+  <div class="panel panel-body">
+	<input type="file" capture="capture" accept="image/*" id="cameraInput" name="cameraInput" ngf-select="onFileSelect($file)">
+
 	</div>
-	<button class="btn btn-block btn-info" ng-click="foundPageCtrl.createURI()">Take picture!</button>
+	
 	</div>
 	<div class="spacer"></div>
 	<div class="panel panel-default" id="map">

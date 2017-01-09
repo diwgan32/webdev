@@ -8,7 +8,7 @@ const ngSanitize = require('angular-sanitize');
 const uiRouter = require('angular-ui-router');
 const uiBootstrap = require('angular-ui-bootstrap');
 const ngAnimate = require('angular-animate');
-
+const ngFileUpload = require('ng-file-upload');
 //const ngMessages = require('angular-messages');
 // import ngValidationMatch from 'angular-validation-match';
 
@@ -49,7 +49,7 @@ angular.module('lafApp', [
   admin,  navbar,
   footer,
   main, lostPage,
-  constants, uiMap, foundPage, ngAnimate, 
+  constants, uiMap, foundPage, ngAnimate, ngFileUpload, 
 
   util, 
 ])

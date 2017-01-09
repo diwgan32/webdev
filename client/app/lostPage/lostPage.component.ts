@@ -77,7 +77,7 @@ export class LostPageComponent {
                     longs: this.$scope.longs
                 }).$promise
                 .then((result) => {
-                    console.log("success");
+              
                     this.$scope.return_items.push(result);
                     this.$scope.lostItemName = "";
                     this.$scope.lostItemDescription = "";

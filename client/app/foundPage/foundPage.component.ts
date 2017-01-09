@@ -4,8 +4,9 @@ const angular = require('angular');
 const uiRouter = require('angular-ui-router');
 import routes from './foundPage.routes.ts'
 import {FoundItemResource} from './founditems.service.ts';
-import {webcam} from '../../../bower_components/webcam/dist/webcam.min.js';
+import {camera} from '../../../bower_components/ng-camera/dist/ng-camera.js'
 import {AnchorSmoothScroll} from '../../components/util/smoothscroll.service.ts';
+
 export class FoundPageComponent {
   /*@ngInject*/
   FoundItem;
@@ -14,7 +15,7 @@ export class FoundPageComponent {
   AnchorSmoothScroll;
   $scope;
   getCurrentUser: Function;
-  constructor(FoundItem, $scope, AnchorSmoothScroll, $window, NgMap, Auth) {
+  constructor(FoundItem, $scope, AnchorSmoothScroll, $window, NgMap, Auth, Upload) {
     this.FoundItem = FoundItem;
     this.$scope = $scope;
     this.$scope.foundItemName = "";
@@ -26,7 +27,17 @@ export class FoundPageComponent {
     };
     this.AnchorSmoothScroll = AnchorSmoothScroll;
     this.getCurrentUser = Auth.getCurrentUserSync;
+    $scope.onFileSelect = function($files) {
+  Upload.upload({
+    url: '/api/fileUploads',
+    file: $files,            
+  }).progress(function(e) {
+  }).then(function(data, status, headers, config) {
+    // file is uploaded successfully
+    console.log(data);
+  }); 
   }
+}
 
   createURI(){
      console.log(this.channel.video);
@@ -70,4 +81,5 @@ export default angular.module('webdevApp.foundPage', [uiRouter])
   })
   .factory("FoundItem", FoundItemResource)
   .service("AnchorSmoothScroll", AnchorSmoothScroll)
+  
   .name;
