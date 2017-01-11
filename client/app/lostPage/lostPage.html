@@ -2,83 +2,82 @@
   
   <!-- Map and Side Panel -->
   
-    <!-- Google Map -->
-      <div class="panel panel-default" id="map">
-        <div class="panel-heading">
-          <h2 class="panel-title text-center">Where did you see it last? <span class="glyphicon glyphicon-map-marker"></span></h2>
-        </div>
-        <div class="panel-body">
-          <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="https://maps.google.com/maps/api/js?key=AIzaSyBYhSeMP_1hP9gm4MpWOezqUaoJOYPrzNw">
-            <map class="my-map" default-style="true" center="37.43 -122.17" zoom="16">
-              <marker ng-repeat="loc in coordString" position={{loc}}></marker>
-            </map>
-          </div>
-          
-        </div>
-        <button class="btn btn-info btn-block" ng-click="lostPageCtrl.AnchorSmoothScroll.smoothScroll('describe')">Next!</button>
+  <!-- Google Map -->
+  <div class="panel panel-default" id="map">
+    <div class="panel-heading">
+      <h2 class="panel-title text-center">Where did you see it last? <span class="glyphicon glyphicon-map-marker"></span></h2>
+    </div>
+    <div class="panel-body">
+      <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="https://maps.google.com/maps/api/js?key=AIzaSyBYhSeMP_1hP9gm4MpWOezqUaoJOYPrzNw">
+        <map class="my-map" default-style="true" center="37.43 -122.17" zoom="16">
+        <marker ng-repeat="loc in coordString" position={{loc}}></marker>
+        </map>
       </div>
-      <div class="spacer"></div>
-
-      <div class="panel panel-default" id="describe">
-        <!-- Panel Title -->
-        <div class="panel-heading">
-          <h2 class="panel-title text-center">Describe it!</h2>
+      
+    </div>
+    <button class="btn btn-info btn-block" ng-click="lostPageCtrl.AnchorSmoothScroll.smoothScroll('describe')">Next!</button>
+  </div>
+  <div class="spacer"></div>
+  <div class="panel panel-default" id="describe">
+    <!-- Panel Title -->
+    <div class="panel-heading">
+      <h2 class="panel-title text-center">Describe it!</h2>
+    </div>
+    <!-- Panel Body -->
+    <div class="panel-body">
+      <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
+      <form name ="form" ng-submit="lostPageCtrl.submitLostItems(form)" novalidate>
+        <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
+        <div class="form-group">
+          <label for="objectname">Name</label>
+          <input type="text" class="form-control" id="objectname" placeholder="Jacket" ng-model="lostItemName" required>
         </div>
-        <!-- Panel Body -->
-        <div class="panel-body">
-          <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
-          <form name ="form" ng-submit="lostPageCtrl.submitLostItems(form)" novalidate>
-            <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
-            <div class="form-group">
-              <label for="objectname">Name</label>
-              <input type="text" class="form-control" id="objectname" placeholder="Jacket" ng-model="lostItemName" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="description">Short description</label>
-              <input type="text" class="form-control" id="shortd" placeholder="Small; bright blue" ng-model="lostItemDescription" required>
-            </div>
-            
-            
-          
-          <button type="submit" class="btn btn-danger btn-block" ng-disabled="form.$invalid">Submit</button>
-        </form>
         
+        <div class="form-group">
+          <label for="description">Short description</label>
+          <input type="text" class="form-control" id="shortd" placeholder="Small; bright blue" ng-model="lostItemDescription" required>
+        </div>
+        
+        
+        
+        <button type="submit" class="btn btn-danger btn-block" ng-disabled="form.$invalid">Submit</button>
+      </form>
+      
+    </div>
+    <div class="spacer"></div>
+    
+    <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
+    
+    <hr/>
+    <div class="panel panel-default" id="items">
+      <div class="panel panel-heading">
+        <h2 class="panel-title text-center"> Your Lost Things</h2>
       </div>
-   <div class="spacer"></div>
-      
-      <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
-      
-<hr/>
-<div class="panel panel-default" id="items">
-  <div class="panel panel-heading">
-    <h2 class="panel-title text-center"> Your Lost Things</h2>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Item</th>
+              <th>Description</th>
+              <th>Locations</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  ng-repeat="thing in return_items">
+              <th scope="row">{{$index+1}}</th>
+              <td>{{thing.itemName}}</td>
+              <td>{{thing.itemDesc}}</td>
+              <td><button class="btn btn-info" ng-click="lostPageCtrl.locationClick(thing)"> Location </button>
+                <td><button class="btn btn-danger" ng-click="lostPageCtrl.removeLocation(thing)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+        <button class="btn btn-info btn-block" ng-click="lostPageCtrl.AnchorSmoothScroll.smoothScroll('map')">Lost Something Else?</button>
+      </div>
+    </div>
+    <div class="spacer"></div>
   </div>
-  <div class="panel-body">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Item</th>
-          <th>Description</th>
-          <th>Locations</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr  ng-repeat="thing in return_items">
-          <th scope="row">{{$index+1}}</th>
-          <td>{{thing.itemName}}</td>
-          <td>{{thing.itemDesc}}</td>
-          <td><button class="btn btn-info" ng-click="lostPageCtrl.locationClick(thing)"> Location </button>
-          <td><button class="btn btn-danger" ng-click="lostPageCtrl.removeLocation(thing)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
-          </td>
-        </tr>
-        
-      </tbody>
-    </table>
-    <button class="btn btn-info btn-block" ng-click="lostPageCtrl.AnchorSmoothScroll.smoothScroll('map')">Lost Something Else?</button>
-  </div>
-</div>
-<div class="spacer"></div>
-</div>

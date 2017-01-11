@@ -37,6 +37,7 @@ angular
 
 
 const uiMap = require('ngMap');
+
 angular.module('lafApp', [
   ngCookies,
   ngResource,

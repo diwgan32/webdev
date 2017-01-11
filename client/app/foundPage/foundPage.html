@@ -1,56 +1,38 @@
 <div class="container">
-	<div class="panel panel-default">
-	<div class="panel-heading">
-	<h2 class="panel-title text-center">Take a picture!</h2>
-	</div>
-  <div class="panel panel-body">
-	<input type="file" capture="capture" accept="image/*" id="cameraInput" name="cameraInput" ngf-select="onFileSelect($file)">
+  <div class="panel panel-default">
+    <div class="panel panel-heading">
+    <h2 class="panel-title text-center"> What did you find? </h2>
+    </div>
+    <div class="panel panel-body">
 
-	</div>
-	
-	</div>
-	<div class="spacer"></div>
-	<div class="panel panel-default" id="map">
-        <div class="panel-heading">
-          <h2 class="panel-title text-center">Where did you see it last? <span class="glyphicon glyphicon-map-marker"></span></h2>
+      <button class="btn btn-info btn-block" type="file" capture="capture" accept="image/*" id="cameraInput" name="cameraInput" ngf-select="foundPageCtrl.fileSelectWrapper($files)">Take a picture!</button>
+    </div>
+    
+  </div>
+  <div class="spacer"></div>
+  <div class="panel panel-default" id="describe">
+    <!-- Panel Title -->
+    <div class="panel-heading">
+      <h2 class="panel-title text-center">Describe it!</h2>
+    </div>
+    <!-- Panel Body -->
+    <div class="panel-body">
+      <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
+      <form name ="form" ng-submit="foundPageCtrl.submitFoundItems(form)" novalidate>
+        <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
+        <div class="form-group">
+          <label for="objectname">Name</label>
+          <input type="text" class="form-control" id="objectname" placeholder="Jacket" ng-model="foundItemName" required>
         </div>
-        <div class="panel-body">
-          <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="https://maps.google.com/maps/api/js?key=AIzaSyBYhSeMP_1hP9gm4MpWOezqUaoJOYPrzNw">
-            <map class="my-map" default-style="true" center="37.43 -122.17" zoom="16">
-              
-            </map>
-          </div>
-          
-        </div>
-        <button class="btn btn-info btn-block" ng-click="lostPageCtrl.AnchorSmoothScroll.smoothScroll('describe')" ng-disabled="lostPageCtrl.locationIsNotSelectedOnMap()">Next!</button>
-      </div>
-      <div class="spacer"></div>
-	<div class="panel panel-default" id="describe">
-        <!-- Panel Title -->
-        <div class="panel-heading">
-          <h2 class="panel-title text-center">Describe it!</h2>
-        </div>
-        <!-- Panel Body -->
-        <div class="panel-body">
-          <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
-          <form name ="form" ng-submit="foundPageCtrl.submitFoundItems(form)" novalidate>
-            <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
-            <div class="form-group">
-              <label for="objectname">Name</label>
-              <input type="text" class="form-control" id="objectname" placeholder="Jacket" ng-model="foundItemName" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="description">Short description</label>
-              <input type="text" class="form-control" id="shortd" placeholder="Small; bright blue" ng-model="foundItemDescription" required>
-            </div>
-            
-            
-          
-          <button type="submit" class="btn btn-danger btn-block" ng-disabled="form.$invalid">Submit</button>
-        </form>
         
-      </div>
+        <div class="form-group">
+          <label for="description">Short description</label>
+          <input type="text" class="form-control" id="shortd" placeholder="Small; bright blue" ng-model="foundItemDescription" required>
+        </div>      
+        <button type="submit" class="btn btn-danger btn-block" ng-disabled="form.$invalid">Submit</button>
+      </form>
+      
+    </div>
+    <div class="spacer"></div>
 
-      <div class="spacer"></div>
-</div>
+  </div>

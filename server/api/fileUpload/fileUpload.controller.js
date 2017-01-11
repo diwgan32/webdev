@@ -12,7 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import FileUpload from './fileUpload.model';
-var uploadLib = require('express-fileupload')
+var shortid = require('shortid');
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
@@ -80,23 +80,22 @@ export function show(req, res) {
 
 // Creates a new FileUpload in the DB
 export function create(req, res) {
-  var sampleFile;
-  console.log(res);
     if (!req.files) {
         res.send('No files were uploaded.');
         return;
     }
- 
-    sampleFile = req.files.sampleFile;
-    sampleFile.mv('/somewhere/on/your/server/filename.jpg', function(err) {
+    var name = shortid.generate();
+    
+    req.files["file[0]"].mv('./images/'+name+'.jpg', function(err) {
         if (err) {
             res.status(500).send(err);
         }
         else {
-            res.send('File uploaded!');
+            res.send(name);
         }
     });
-}
+  }
+
 
 // Upserts the given FileUpload in the DB at the specified ID
 export function upsert(req, res) {

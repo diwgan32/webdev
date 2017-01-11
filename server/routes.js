@@ -9,6 +9,8 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  var fileUpload = require('express-fileupload');
+  app.use(fileUpload());
   app.use('/api/fileUploads', require('./api/fileUpload'));
   app.use('/api/foundItems', require('./api/foundItem'));
   app.use('/api/lostItems', require('./api/lostItem'));
